@@ -1,6 +1,3 @@
-// Sample program I was able to design and write from
-// scratch by the end of CPSC 1155 at Langara College
-
 #include <iostream>
 #include <string>
 
