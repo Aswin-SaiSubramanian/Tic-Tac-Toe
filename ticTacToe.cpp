@@ -12,15 +12,17 @@ This program facilitates a game of Tic-Tac-Toe between two
 human players.
 */
 
+
+const int BOARD_SIZE = 3;
+const int COORDINATES = 2;
+
+void readMove(string player, int moveCoords[COORDINATES]);
 bool boardFilled(int board[][3]);
 bool isWin(int board[][3]);
 int whoWon(int board[][3]);
 
 int main()
 {
-    const int BOARD_SIZE = 3;
-    const int COORDINATES = 2;
-
     int board[BOARD_SIZE][BOARD_SIZE] = {{},{}};
     int playerOneMove[COORDINATES] = {};
     int playerTwoMove[COORDINATES] = {};
@@ -36,20 +38,8 @@ int main()
     cout << endl;
     while(!boardFilled(board) && !isWin(board))
     {
-        // Taking in Player 1's move
-        int input;
-        cout << "Enter the row and column of your move, " << player1 << " : " << endl;
-        for(int i = 0; i < COORDINATES; i++)
-        {
-            cin >> input;
-            if((input >= 0) && (input < BOARD_SIZE))
-                playerOneMove[i] = input;
-            else
-            {
-                cout << "Invlid input. Enter a coordinate less than " << BOARD_SIZE << endl;
-                i--;
-            }
-        }
+	// Reading player1's move
+	readMove(player1, playerOneMove);
         // Applying move to the board, if the spot of the move is not already taken
         if(board[playerOneMove[0]][playerOneMove[1]] == 0)
             board[playerOneMove[0]][playerOneMove[1]] = 1;
@@ -89,19 +79,9 @@ int main()
         
         
         //Taking in Player 2's move
-        cout << "Enter the row and column of your move, " << player2 << " : " << endl;
-        for(int i = 0; i < COORDINATES; i++)
-        {
-            cin >> input;
-            if((input >= 0) && (input < BOARD_SIZE))
-                playerTwoMove[i] = input;
-            else
-            {
-                cout << "Invalid input. Enter a coordinate less than " << BOARD_SIZE << endl;
-                i--;
-            }
-        }
-        // Applying the move to the board, if the spot is not already taken
+	readMove(player2, playerTwoMove);
+        
+	// Applying the move to the board, if the spot is not already taken
         if(board[playerTwoMove[0]][playerTwoMove[1]] == 0)
             board[playerTwoMove[0]][playerTwoMove[1]] = 2;
         else
@@ -137,7 +117,23 @@ int main()
     return 0;
 }
 
-
+void readMove(string player, int moveCoords[COORDINATES])
+{
+        // Taking in player's move
+        int input;
+        cout << "Enter the row and column of your move, " << player << " : " << endl;
+        for(int i = 0; i < COORDINATES; i++)
+        {
+            cin >> input;
+            if((input >= 0) && (input < BOARD_SIZE))
+                moveCoords[i] = input;
+            else
+            {
+                cout << "Invlid input. Enter a coordinate less than " << BOARD_SIZE << endl;
+                i--;
+            }
+	}
+}
 
 bool boardFilled(int board[][3])
 {
