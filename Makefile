@@ -4,7 +4,7 @@
 #  	action
 
 ticTacToe: ticTacToe.o
-	g++ ticTacToe.o -o ticTactoe
+	g++ ticTacToe.o -o ticTacToe
 
 ticTacToe.o: ticTacToe.cpp
 	g++ -c ticTacToe.cpp
